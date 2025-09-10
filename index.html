@@ -28,27 +28,39 @@
   const controls = new OrbitControls(camera, renderer.domElement);
   controls.enableDamping = true;
 
-  const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1);
-  hemiLight.position.set(0, 20, 0);
-  scene.add(hemiLight);
 
-  const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-  dirLight.position.set(3, 10, 10);
-  scene.add(dirLight);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+scene.add(ambientLight);
+
+
+const mainLight = new THREE.DirectionalLight(0xffffff, 1.5);
+mainLight.position.set(5, 10, 7);
+mainLight.castShadow = true;
+scene.add(mainLight);
+
+
+const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
+fillLight.position.set(-5, -10, -7);
+scene.add(fillLight);
+
+
+const topLight = new THREE.DirectionalLight(0xffffff, 0.5);
+topLight.position.set(0, 10, 0);
+scene.add(topLight);
 
   const loader = new GLTFLoader();
 
-  // Cuidado com espaços, encodeURI ajuda
+
   loader.load(encodeURI('half spool.glb'), function(gltf) {
     scene.add(gltf.scene);
 
-    // Centraliza o modelo
+
     const box = new THREE.Box3().setFromObject(gltf.scene);
     const size = box.getSize(new THREE.Vector3()).length();
     const center = box.getCenter(new THREE.Vector3());
     gltf.scene.position.sub(center);
 
-    // Ajusta a câmera para ver o modelo inteiro
+
     camera.position.set(size * 0.6, size * 0.6, size * 0.9);
     camera.lookAt(0, 0, 0);
 
