@@ -29,24 +29,32 @@
   controls.enableDamping = true;
 
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+// Luz ambiente suave para uniformidade geral
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
 scene.add(ambientLight);
 
-const light1 = new THREE.DirectionalLight(0xffffff, 0.4);
-light1.position.set(5, 5, 5);
-scene.add(light1);
+// Luz principal de cima (tipo teto de estúdio)
+const topLight = new THREE.DirectionalLight(0xffffff, 1.0);
+topLight.position.set(0, 10, 0);
+topLight.castShadow = true;
+scene.add(topLight);
 
-const light2 = new THREE.DirectionalLight(0xffffff, 0.4);
-light2.position.set(-5, 5, 5);
-scene.add(light2);
+// Luz frontal para realçar volume
+const frontLight = new THREE.DirectionalLight(0xffffff, 0.6);
+frontLight.position.set(5, 5, 5);
+scene.add(frontLight);
 
-const light3 = new THREE.DirectionalLight(0xffffff, 0.4);
-light3.position.set(5, 5, -5);
-scene.add(light3);
+// Luz de baixo para criar sombras e iluminar a parte inferior
+const bottomLight = new THREE.DirectionalLight(0xffffff, 0.8);
+bottomLight.position.set(0, -5, 0);
+bottomLight.castShadow = true;
+scene.add(bottomLight);
 
-const light4 = new THREE.DirectionalLight(0xffffff, 0.4);
-light4.position.set(-5, 5, -5);
-scene.add(light4);
+// Luz de preenchimento lateral leve para suavizar sombras
+const sideLight = new THREE.DirectionalLight(0xffffff, 0.3);
+sideLight.position.set(-5, 0, 5);
+scene.add(sideLight);
+
 
 
   const loader = new GLTFLoader();
