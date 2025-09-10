@@ -39,7 +39,12 @@ mainLight.castShadow = true;
 scene.add(mainLight);
 
 
-const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
+const backLight = new THREE.DirectionalLight(0xffffff, 1.2);
+backLight.position.set(-8, 5, -10); // vem de trás e de baixo
+scene.add(backLight);
+
+
+const fillLight = new THREE.DirectionalLight(0xffffff, 0.7);
 fillLight.position.set(-5, -10, -7);
 scene.add(fillLight);
 
