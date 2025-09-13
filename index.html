@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Visualizador 3D - half spool</title>
+  <title>Visualizador 3D - Strap</title>
   <style>
     body { margin: 0; background: #222; overflow: hidden; }
     canvas { display: block; }
@@ -29,33 +29,24 @@
   controls.enableDamping = true;
 
 
-// Luz ambiente suave para uniformidade geral
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
 scene.add(ambientLight);
 
-// Luz principal de cima (tipo teto de estúdio)
-const topLight = new THREE.DirectionalLight(0xffffff, 1.0);
+
+const mainLight = new THREE.DirectionalLight(0xffffff, 1.5);
+mainLight.position.set(5, 10, 7);
+mainLight.castShadow = true;
+scene.add(mainLight);
+
+
+const fillLight = new THREE.DirectionalLight(0xffffff, 0.8);
+fillLight.position.set(-5, -10, -7);
+scene.add(fillLight);
+
+
+const topLight = new THREE.DirectionalLight(0xffffff, 0.5);
 topLight.position.set(0, 10, 0);
-topLight.castShadow = true;
 scene.add(topLight);
-
-// Luz frontal para realçar volume
-const frontLight = new THREE.DirectionalLight(0xffffff, 0.6);
-frontLight.position.set(5, 5, 5);
-scene.add(frontLight);
-
-// Luz de baixo para criar sombras e iluminar a parte inferior
-const bottomLight = new THREE.DirectionalLight(0xffffff, 0.8);
-bottomLight.position.set(0, -5, 0);
-bottomLight.castShadow = true;
-scene.add(bottomLight);
-
-// Luz de preenchimento lateral leve para suavizar sombras
-const sideLight = new THREE.DirectionalLight(0xffffff, 0.3);
-sideLight.position.set(-5, 0, 5);
-scene.add(sideLight);
-
-
 
   const loader = new GLTFLoader();
 
